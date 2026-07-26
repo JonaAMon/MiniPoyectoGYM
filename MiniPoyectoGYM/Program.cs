@@ -5,7 +5,6 @@ namespace MiniPoyectoGYM
 {
     internal class Program
     {
-        // Declaración de listas globales para almacenar datos en memoria
         static List<Socio> listaSocios = new List<Socio>();
         static List<Entrenador> listaEntrenadores = new List<Entrenador>();
         static List<Plan> listaPlanes = new List<Plan>();
