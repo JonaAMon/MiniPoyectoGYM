@@ -7,7 +7,16 @@ int opcion = 0;
 do
 {
     Console.Clear();
-    Console.WriteLine("****************SISTEMA DE GESTION GIMNASIO (GYM)****************");
+
+    Console.ForegroundColor = ConsoleColor.DarkYellow;
+    Console.WriteLine(@"
+    _   _   _________________________________   _   _
+   | |_| | /                                 \ | |_| |
+   |  _  | |   SISTEMA DE GESTION GIMNASIO   | |  _  |
+   |_| |_| \_________________________________/ |_| |_|
+   [_____]                                     [_____]
+    ");
+    Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("Menú de Opciones:");
     Console.WriteLine("1.- Crear Socio");
     Console.WriteLine("2.- Listar Socios");
