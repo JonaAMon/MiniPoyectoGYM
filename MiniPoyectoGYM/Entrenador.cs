@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniPoyectoGYM.Generales;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,6 @@ namespace MiniPoyectoGYM
 {
     public class Entrenador
     {
-        private static int contadorId = 0;
         private int id;
         private string nombre;
         private string especialidad;
@@ -28,11 +28,11 @@ namespace MiniPoyectoGYM
 
         public Entrenador(string nombre, string especialidad)
         {
-            contadorId++;
-            this.Id = contadorId;
+       
             this.Nombre = nombre;
             this.Especialidad = especialidad;
-            
+            this.Id = Database.Entrenadores.Count == 0 ? 1 : Database.Entrenadores.Max(e => e.Id) + 1;
+
         }
 
         public void Imprimir()

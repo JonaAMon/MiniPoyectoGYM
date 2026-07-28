@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniPoyectoGYM.Generales;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,6 @@ namespace MiniPoyectoGYM
 {
     public class Inscripcion
     {
-        private static int contadorId = 0;
         private int id;
         private Socio socio;
         private Entrenador entrenador;
@@ -25,14 +25,13 @@ namespace MiniPoyectoGYM
 
         public Inscripcion(Socio socio, Entrenador entrenador, Plan plan)
         {
-            contadorId++;
-            this.Id = contadorId;
             this.Socio = socio;
             this.Entrenador = entrenador;
             this.Plan = plan;
             this.FechaInicio = DateTime.Now;
             this.Activa = true;
-           
+            this.Id = Database.Inscripciones.Count == 0 ? 1 : Database.Inscripciones.Max(i => i.Id) + 1;
+
         }
 
         public void Imprimir()

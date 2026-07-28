@@ -19,7 +19,11 @@ namespace MiniPoyectoGYM.Generales
 
         public static void CargarDatos()
         {
-            if (!Directory.Exists(rutaCarpeta)) Directory.CreateDirectory(rutaCarpeta);
+            if (!Directory.Exists(rutaCarpeta))
+            {
+                Directory.CreateDirectory(rutaCarpeta);
+            }
+
             Socios = ArchivoJson.LeerArchivo<Socio>(rutaSocios);
             Entrenadores = ArchivoJson.LeerArchivo<Entrenador>(rutaEntrenadores);
             Planes = ArchivoJson.LeerArchivo<Plan>(rutaPlanes);

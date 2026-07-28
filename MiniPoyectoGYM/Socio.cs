@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniPoyectoGYM.Generales;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,6 @@ namespace MiniPoyectoGYM
 {
     public class Socio
     {
-        private static int contadorId=0;
         private string nombre;
         private string cedula;
         private int edad;
@@ -44,12 +44,11 @@ namespace MiniPoyectoGYM
 
         public Socio(string nombre, string cedula, int edad)
         {
-            contadorId++;
-            this.Id = contadorId;
             this.Nombre = nombre;
             this.Cedula = cedula;
             this.Edad = edad;
-            
+            this.Id = Database.Socios.Count == 0 ? 1 : Database.Socios.Max(s => s.Id) + 1;
+
         }
 
         public void Imprimir()

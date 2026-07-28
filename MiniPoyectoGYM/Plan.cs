@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniPoyectoGYM.Generales;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,6 @@ namespace MiniPoyectoGYM
 {
     public class Plan
     {
-        private static int contadorId = 0;
         private int id;
         private string nombre;
         private double precio;
@@ -39,12 +39,10 @@ namespace MiniPoyectoGYM
 
         public Plan(string nombre, double precio, int duracionMeses)
         {
-            contadorId++;
-            this.Id = contadorId;
             this.Nombre = nombre;
             this.Precio = precio;
             this.DuracionMeses = duracionMeses;
-           
+            this.Id = Database.Planes.Count == 0 ? 1 : Database.Planes.Max(p => p.Id) + 1;
         }
 
         public void Imprimir()
