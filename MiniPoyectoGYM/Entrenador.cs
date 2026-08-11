@@ -8,8 +8,8 @@ namespace MiniPoyectoGYM
     public class Entrenador
     {
         private int id;
-        private string nombre;
-        private string especialidad;
+        private string? nombre;
+        private string? especialidad;
 
         public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -31,7 +31,7 @@ namespace MiniPoyectoGYM
        
             this.Nombre = nombre;
             this.Especialidad = especialidad;
-            this.Id = Database.Entrenadores.Count == 0 ? 1 : Database.Entrenadores.Max(e => e.Id) + 1;
+            
 
         }
 

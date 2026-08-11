@@ -7,8 +7,8 @@ namespace MiniPoyectoGYM
 {
     public class Socio
     {
-        private string nombre;
-        private string cedula;
+        private string? nombre;
+        private string? cedula;
         private int edad;
         private int id;
 
@@ -47,7 +47,6 @@ namespace MiniPoyectoGYM
             this.Nombre = nombre;
             this.Cedula = cedula;
             this.Edad = edad;
-            this.Id = Database.Socios.Count == 0 ? 1 : Database.Socios.Max(s => s.Id) + 1;
 
         }
 
