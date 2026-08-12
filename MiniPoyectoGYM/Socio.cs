@@ -17,9 +17,9 @@ namespace MiniPoyectoGYM
             get => id;
             set => id = value;
         }
-        public string Nombre { get => nombre; set => nombre = value; }
+        public string? Nombre { get => nombre; set => nombre = value; }
 
-        public string Cedula
+        public string? Cedula
         {
             get => cedula;
             set

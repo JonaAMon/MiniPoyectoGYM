@@ -8,6 +8,9 @@ namespace MiniPoyectoGYM
     public class Inscripcion
     {
         private int id;
+        private int socioId;
+        private int entrenadorId;
+        private int planId;
         private Socio socio;
         private Entrenador entrenador;
         private Plan plan;
@@ -15,6 +18,10 @@ namespace MiniPoyectoGYM
         private bool activa;
 
         public int Id { get => id; set => id = value; }
+        public int SocioId { get => socioId; set => socioId = value; }
+        public int EntrenadorId { get => entrenadorId; set => entrenadorId = value; }
+        public int PlanId { get => planId; set => planId = value; }
+
         public Socio Socio { get => socio; set => socio = value; }
         public Entrenador Entrenador { get => entrenador; set => entrenador = value; }
         public Plan Plan { get => plan; set => plan = value; }
@@ -30,7 +37,7 @@ namespace MiniPoyectoGYM
             this.Plan = plan;
             this.FechaInicio = DateTime.Now;
             this.Activa = true;
-            this.Id = Database.Inscripciones.Count == 0 ? 1 : Database.Inscripciones.Max(i => i.Id) + 1;
+            
 
         }
 

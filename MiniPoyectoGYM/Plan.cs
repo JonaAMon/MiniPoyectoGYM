@@ -8,12 +8,12 @@ namespace MiniPoyectoGYM
     public class Plan
     {
         private int id;
-        private string nombre;
+        private string? nombre;
         private double precio;
         private int duracionMeses;
 
         public int Id { get => id; set => id = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
+        public string? Nombre { get => nombre; set => nombre = value; }
 
         public double Precio
         {
@@ -42,7 +42,7 @@ namespace MiniPoyectoGYM
             this.Nombre = nombre;
             this.Precio = precio;
             this.DuracionMeses = duracionMeses;
-            this.Id = Database.Planes.Count == 0 ? 1 : Database.Planes.Max(p => p.Id) + 1;
+           
         }
 
         public void Imprimir()

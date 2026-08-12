@@ -1,7 +1,6 @@
 ﻿using MiniPoyectoGYM;
 using MiniPoyectoGYM.Generales;
 
-Database.CargarDatos();
 int opcion = 0;
 
 do
