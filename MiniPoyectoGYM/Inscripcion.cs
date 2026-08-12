@@ -25,7 +25,7 @@ namespace MiniPoyectoGYM
         public Socio Socio { get => socio; set => socio = value; }
         public Entrenador Entrenador { get => entrenador; set => entrenador = value; }
         public Plan Plan { get => plan; set => plan = value; }
-        public DateTime FechaInicio { get => fechaInicio; set => fechaInicio = value; }
+        public DateOnly FechaInicio { get; set; }
         public bool Activa { get => activa; set => activa = value; }
 
         public Inscripcion() { }
@@ -35,17 +35,24 @@ namespace MiniPoyectoGYM
             this.Socio = socio;
             this.Entrenador = entrenador;
             this.Plan = plan;
-            this.FechaInicio = DateTime.Now;
-            this.Activa = true;
+            if (socio != null) this.SocioId = socio.Id;
+            if (entrenador != null) this.EntrenadorId = entrenador.Id;
+            if (plan != null) this.PlanId = plan.Id;
+                FechaInicio = DateOnly.FromDateTime(DateTime.Now);
+                Activa = true;
             
 
         }
 
         public void Imprimir()
         {
-            string estado = this.Activa ? "Activa" : "Inactiva/Cancelada";
-            Console.WriteLine($"[Inscripción #{this.Id}] Socio: {this.Socio?.Nombre ?? "N/A"} | Plan: {this.Plan?.Nombre ?? "N/A"}");
-            Console.WriteLine($"   Entrenador: {this.Entrenador?.Nombre ?? "N/A"} | Fecha: {this.FechaInicio.ToShortDateString()} | Estado: {estado}");
+            string nombreSocio = Socio != null ? Socio.Nombre : "Sin Socio";
+            string nombrePlan = Plan != null ? Plan.Nombre : "Sin Plan";
+            string nombreEntrenador = Entrenador != null ? Entrenador.Nombre : "Sin Entrenador";
+            string estado = Activa ? "Activa" : "Inactiva/Cancelada";
+
+            Console.WriteLine($"[Inscripción #{Id}] Socio: {nombreSocio} | Plan: {nombrePlan}");
+            Console.WriteLine($"Entrenador: {nombreEntrenador} | Fecha: {FechaInicio.ToShortDateString()} | Estado: {estado}");
         }
     }
 }
