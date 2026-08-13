@@ -17,37 +17,41 @@ do
 {
     Console.Clear();
 
-    Console.ForegroundColor = ConsoleColor.DarkYellow;
+   
+    Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine(@"
-    _   _   _________________________________   _   _
-   | |_| | /                                 \ | |_| |
-   |  _  | |   SISTEMA DE GESTION GIMNASIO   | |  _  |
-   |_| |_| \_________________________________/ |_| |_|
-   [_____]                                     [_____]
+    .-.                                                                          .-.
+  .-| |--------------------------------------------------------------------------| |-.
+  | | |                                                                          | | |
+  | | |   .------------------------------------------------------------------.   | | |
+  |-| |---|  ██████╗ ██╗   ██╗███╗   ███╗      ██████╗ ██████╗ ███╗   ███╗   |---| |-|
+  | | |   |  ██╔════╝╚██╗ ██╔╝████╗ ████║      ██╔════╝██╔═══██╗████╗ ████║  |   | | |
+  | | |   |  ██║  ███╗╚████╔╝ ██╔████╔██║  ██╗ ██║     ██║   ██║██╔████╔██║  |   | | |
+  |-| |---|  ██║   ██║ ╚██╔╝  ██║╚██╔╝██║  ╚═╝ ██║     ██║   ██║██║╚██╔╝██║  |---| |-|
+  | | |   |  ╚██████╔╝  ██║   ██║ ╚═╝ ██║      ╚██████╗╚██████╔╝██║ ╚═╝ ██║  |   | | |
+  | | |   |   ╚═════╝   ╚═╝   ╚═╝     ╚═╝       ╚═════╝ ╚═════╝ ╚═╝     ╚═╝  |   | | |
+  '-| |---|------------------------------------------------------------------|---| |-'
+    '-'                                                                          '-'
     ");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.WriteLine("Menú de Opciones:");
-    Console.WriteLine("1.- Crear Socio");
-    Console.WriteLine("2.- Listar Socios");
-    Console.WriteLine("3.- Actualizar Socio");
-    Console.WriteLine("4.- Eliminar Socio");
-    Console.WriteLine("5.- Crear Entrenador");
-    Console.WriteLine("6.- Listar Entrenadores");
-    Console.WriteLine("7.- Actualizar Entrenador");
-    Console.WriteLine("8.- Eliminar Entrenador");
-    Console.WriteLine("9.- Crear Plan");
-    Console.WriteLine("10.- Listar Planes");
-    Console.WriteLine("11.- Actualizar Plan");
-    Console.WriteLine("12.- Eliminar Plan");
-    Console.WriteLine("13.- Crear Inscripción");
-    Console.WriteLine("14.- Listar Inscripciones");
-    Console.WriteLine("15.- Cambiar Estado Inscripción");
-    Console.WriteLine("16.- Eliminar Inscripción");
-    Console.WriteLine("17.- Salir al Torneo de Fútbol");
-    Console.WriteLine("");
-    Console.Write("Ingrese una opción: ");
 
-    opcion = Convert.ToInt32(Console.ReadLine());
+    Console.ForegroundColor = ConsoleColor.DarkYellow;
+    Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("║                                MENÚ DE OPCIONES                                   ║");
+    Console.WriteLine("╠═══════════════════════════════════════════════════════════════════════════════════╣");
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine("║  [1]  Crear Socio          [5]  Crear Entrenador       [9]  Crear Plan            ║");
+    Console.WriteLine("║  [2]  Listar Socios        [6]  Listar Entrenadores    [10] Listar Planes         ║");
+    Console.WriteLine("║  [3]  Actualizar Socio     [7]  Actualizar Entrenador  [11] Actualizar Plan       ║");
+    Console.WriteLine("║  [4]  Eliminar Socio       [8]  Eliminar Entrenador    [12] Eliminar Plan         ║");
+    Console.WriteLine("║ --------------------------------------------------------------------------------- ║");
+    Console.WriteLine("║  [13] Crear Inscripción    [14] Listar Inscripciones   [15] Actualizar Inscripción║");
+    Console.WriteLine("║  [16] Eliminar Inscripción                             [17] Salir al Torneo       ║");
+    Console.ForegroundColor = ConsoleColor.DarkYellow;
+    Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════╝");
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.Write("\n» Ingrese una opción: ");
+
+    int.TryParse(Console.ReadLine(), out opcion);
 
     switch (opcion)
     {
@@ -65,28 +69,67 @@ do
         case 12: eliminarPlan(); break;
         case 13: crearInscripcion(); break;
         case 14: listarInscripciones(); break;
-        case 15: cambiarEstadoInscripcion(); break;
+        case 15: actualizarInscripcion(); break;
         case 16: eliminarInscripcion(); break;
         case 17: Console.WriteLine("Saliendo del sistema de gimnasio..."); break;
         default:
-            Console.WriteLine("Opción inválida. Por favor, intente nuevamente.");
+            Console.WriteLine("Opción inválida. Presione Enter para reintentar.");
             Console.ReadLine();
             break;
     }
 
 } while (opcion != 17);
+
+int LeerEntero(string mensaje)
+{
+    int numero;
+    Console.Write(mensaje);
+    while (!int.TryParse(Console.ReadLine(), out numero))
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("Entrada no válida. Por favor ingrese un número entero: ");
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+    return numero;
+}
+
+double LeerDouble(string mensaje)
+{
+    double numero;
+    Console.Write(mensaje);
+    while (!double.TryParse(Console.ReadLine(), out numero) || numero < 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("Entrada no válida. Por favor ingrese un monto correcto: ");
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+    return numero;
+}
+
+string LeerTextoObligatorio(string mensaje)
+{
+    Console.Write(mensaje);
+    string entrada = Console.ReadLine()?.Trim();
+    while (string.IsNullOrWhiteSpace(entrada))
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("El campo no puede estar vacío. Intente de nuevo: ");
+        Console.ForegroundColor = ConsoleColor.White;
+        entrada = Console.ReadLine()?.Trim();
+    }
+    return entrada;
+}
+
+
 void crearSocio()
 {
     Console.Clear();
     Console.WriteLine("**********Crear Socio**********");
     try
     {
-        Console.WriteLine("Ingrese el nombre del socio: ");
-        string nombre = Console.ReadLine();
-        Console.WriteLine("Ingrese la cédula (10 dígitos): ");
-        string cedula = Console.ReadLine();
-        Console.WriteLine("Ingrese la edad del socio: ");
-        int edad = Convert.ToInt32(Console.ReadLine());
+        string nombre = LeerTextoObligatorio("Ingrese el nombre del socio: ");
+        string cedula = LeerTextoObligatorio("Ingrese la cédula: ");
+        int edad = LeerEntero("Ingrese la edad del socio: ");
 
         using (var db = new GymDbContext())
         {
@@ -109,10 +152,17 @@ void listarSocios()
     using (var db = new GymDbContext())
     {
         var socios = db.Socios.ToList();
-        foreach (var s in socios)
+        if (!socios.Any())
         {
-            s.Imprimir();
-            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("No hay socios registrados.");
+        }
+        else
+        {
+            foreach (var s in socios)
+            {
+                s.Imprimir();
+                Console.WriteLine("-----------------------------------");
+            }
         }
     }
     Console.ReadLine();
@@ -122,35 +172,28 @@ void actualizarSocio()
 {
     Console.Clear();
     Console.WriteLine("**********Actualizar Socio**********");
-    Console.WriteLine("Ingrese el ID del socio a actualizar: ");
-    int idU = Convert.ToInt32(Console.ReadLine());
+    int idU = LeerEntero("Ingrese el ID del socio a actualizar: ");
 
     using (var db = new GymDbContext())
     {
         var socioU = db.Socios.Find(idU);
         if (socioU != null)
         {
-            try
-            {
-                Console.WriteLine($"Ingrese el nuevo nombre ({socioU.Nombre}): ");
-                string n = Console.ReadLine();
-                Console.WriteLine($"Ingrese la nueva cédula ({socioU.Cedula}): ");
-                string c = Console.ReadLine();
-                Console.WriteLine($"Ingrese la nueva edad ({socioU.Edad}): ");
-                string eStr = Console.ReadLine();
-                
+            Console.WriteLine($"Ingrese el nuevo nombre ({socioU.Nombre}) [Enter para omitir]: ");
+            string n = Console.ReadLine()?.Trim();
 
-                if (!string.IsNullOrWhiteSpace(n)) socioU.Nombre = n;
-                if (!string.IsNullOrWhiteSpace(c)) socioU.Cedula = c;
-                if (!string.IsNullOrWhiteSpace(eStr)) socioU.Edad = Convert.ToInt32(eStr);
+            Console.WriteLine($"Ingrese la nueva cédula ({socioU.Cedula}) [Enter para omitir]: ");
+            string c = Console.ReadLine()?.Trim();
 
-                db.SaveChanges();
-                Console.WriteLine("Socio actualizado exitosamente.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+            Console.WriteLine($"Ingrese la nueva edad ({socioU.Edad}) [Enter para omitir]: ");
+            string eStr = Console.ReadLine()?.Trim();
+
+            if (!string.IsNullOrWhiteSpace(n)) socioU.Nombre = n;
+            if (!string.IsNullOrWhiteSpace(c)) socioU.Cedula = c;
+            if (int.TryParse(eStr, out int nuevaEdad)) socioU.Edad = nuevaEdad;
+
+            db.SaveChanges();
+            Console.WriteLine("Socio actualizado exitosamente.");
         }
         else
         {
@@ -164,8 +207,7 @@ void eliminarSocio()
 {
     Console.Clear();
     Console.WriteLine("**********Eliminar Socio**********");
-    Console.WriteLine("Ingrese el ID del socio a eliminar: ");
-    int idE = Convert.ToInt32(Console.ReadLine());
+    int idE = LeerEntero("Ingrese el ID del socio a eliminar: ");
 
     using (var db = new GymDbContext())
     {
@@ -183,16 +225,15 @@ void eliminarSocio()
     }
     Console.ReadLine();
 }
+
 void crearEntrenador()
 {
     Console.Clear();
     Console.WriteLine("**********Crear Entrenador**********");
     try
     {
-        Console.WriteLine("Ingrese el nombre del entrenador: ");
-        string nombre = Console.ReadLine();
-        Console.WriteLine("Ingrese la especialidad: ");
-        string especialidad = Console.ReadLine();
+        string nombre = LeerTextoObligatorio("Ingrese el nombre del entrenador: ");
+        string especialidad = LeerTextoObligatorio("Ingrese la especialidad: ");
 
         using (var db = new GymDbContext())
         {
@@ -215,10 +256,17 @@ void listarEntrenadores()
     using (var db = new GymDbContext())
     {
         var entrenadores = db.Entrenadores.ToList();
-        foreach (var e in entrenadores)
+        if (!entrenadores.Any())
         {
-            e.Imprimir();
-            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("No hay entrenadores registrados.");
+        }
+        else
+        {
+            foreach (var e in entrenadores)
+            {
+                e.Imprimir();
+                Console.WriteLine("-----------------------------------");
+            }
         }
     }
     Console.ReadLine();
@@ -228,31 +276,24 @@ void actualizarEntrenador()
 {
     Console.Clear();
     Console.WriteLine("**********Actualizar Entrenador**********");
-    Console.WriteLine("Ingrese el ID del entrenador a actualizar: ");
-    int idU = Convert.ToInt32(Console.ReadLine());
+    int idU = LeerEntero("Ingrese el ID del entrenador a actualizar: ");
 
     using (var db = new GymDbContext())
     {
         var entU = db.Entrenadores.Find(idU);
         if (entU != null)
         {
-            try
-            {
-                Console.WriteLine($"Ingrese el nuevo nombre ({entU.Nombre}): ");
-                string n = Console.ReadLine();
-                Console.WriteLine($"Ingrese la nueva especialidad ({entU.Especialidad}): ");
-                string esp = Console.ReadLine();
+            Console.WriteLine($"Ingrese el nuevo nombre ({entU.Nombre}) [Enter para omitir]: ");
+            string n = Console.ReadLine()?.Trim();
 
-                if (!string.IsNullOrWhiteSpace(n)) entU.Nombre = n;
-                if (!string.IsNullOrWhiteSpace(esp)) entU.Especialidad = esp;
+            Console.WriteLine($"Ingrese la nueva especialidad ({entU.Especialidad}) [Enter para omitir]: ");
+            string esp = Console.ReadLine()?.Trim();
 
-                db.SaveChanges();
-                Console.WriteLine("Entrenador actualizado exitosamente.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+            if (!string.IsNullOrWhiteSpace(n)) entU.Nombre = n;
+            if (!string.IsNullOrWhiteSpace(esp)) entU.Especialidad = esp;
+
+            db.SaveChanges();
+            Console.WriteLine("Entrenador actualizado exitosamente.");
         }
         else
         {
@@ -266,8 +307,7 @@ void eliminarEntrenador()
 {
     Console.Clear();
     Console.WriteLine("**********Eliminar Entrenador**********");
-    Console.WriteLine("Ingrese el ID del entrenador a eliminar: ");
-    int idE = Convert.ToInt32(Console.ReadLine());
+    int idE = LeerEntero("Ingrese el ID del entrenador a eliminar: ");
 
     using (var db = new GymDbContext())
     {
@@ -285,18 +325,16 @@ void eliminarEntrenador()
     }
     Console.ReadLine();
 }
+
 void crearPlan()
 {
     Console.Clear();
     Console.WriteLine("**********Crear Plan**********");
     try
     {
-        Console.WriteLine("Ingrese el nombre del plan: ");
-        string nombre = Console.ReadLine();
-        Console.WriteLine("Ingrese el precio ($): ");
-        double precio = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Ingrese la duración en meses: ");
-        int meses = Convert.ToInt32(Console.ReadLine());
+        string nombre = LeerTextoObligatorio("Ingrese el nombre del plan: ");
+        double precio = LeerDouble("Ingrese el precio ($): ");
+        int meses = LeerEntero("Ingrese la duración en meses: ");
 
         using (var db = new GymDbContext())
         {
@@ -319,10 +357,17 @@ void listarPlanes()
     using (var db = new GymDbContext())
     {
         var planes = db.Planes.ToList();
-        foreach (var p in planes)
+        if (!planes.Any())
         {
-            p.Imprimir();
-            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("No hay planes registrados.");
+        }
+        else
+        {
+            foreach (var p in planes)
+            {
+                p.Imprimir();
+                Console.WriteLine("-----------------------------------");
+            }
         }
     }
     Console.ReadLine();
@@ -333,54 +378,34 @@ void actualizarPlan()
     Console.Clear();
     Console.WriteLine("**** Actualizar Plan ****");
 
+    int id = LeerEntero("Ingrese el ID del plan a modificar: ");
     using (var db = new GymDbContext())
     {
-        Console.WriteLine("Ingrese el ID del plan a modificar: ");
-        if (int.TryParse(Console.ReadLine(), out int id))
+        var plan = db.Planes.Find(id);
+
+        if (plan != null)
         {
-            var plan = db.Planes.Find(id);
+            Console.WriteLine($"Nombre actual: {plan.Nombre}");
+            Console.WriteLine("Ingrese el nuevo nombre [Enter para mantener actual]:");
+            string nuevoNombre = Console.ReadLine()?.Trim();
+            if (!string.IsNullOrWhiteSpace(nuevoNombre)) plan.Nombre = nuevoNombre;
 
-            if (plan != null)
-            {
-                // 1. Pedir Nuevo Nombre
-                Console.WriteLine($"Nombre actual: {plan.Nombre}");
-                Console.WriteLine("Ingrese el nuevo nombre (o presione Enter para mantener el actual):");
-                string nuevoNombre = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(nuevoNombre))
-                {
-                    plan.Nombre = nuevoNombre;
-                }
+            Console.WriteLine($"Precio actual: {plan.Precio}");
+            Console.WriteLine("Ingrese el nuevo precio [Enter para mantener actual]:");
+            string inputPrecio = Console.ReadLine()?.Trim();
+            if (double.TryParse(inputPrecio, out double nuevoPrecio)) plan.Precio = nuevoPrecio;
 
-                // 2. Pedir Nuevo Precio
-                Console.WriteLine($"Precio actual: {plan.Precio}");
-                Console.WriteLine("Ingrese el nuevo precio (o presione Enter para mantener el actual):");
-                string inputPrecio = Console.ReadLine();
-                if (double.TryParse(inputPrecio, out double nuevoPrecio))
-                {
-                    plan.Precio = nuevoPrecio;
-                }
+            Console.WriteLine($"Duración actual: {plan.DuracionMeses} meses");
+            Console.WriteLine("Ingrese la nueva duración en meses [Enter para mantener actual]:");
+            string inputDuracion = Console.ReadLine()?.Trim();
+            if (int.TryParse(inputDuracion, out int nuevaDuracion)) plan.DuracionMeses = nuevaDuracion;
 
-                // 3. PEDIR NUEVA DURACIÓN EN MESES (Asegúrate de tener esta sección)
-                Console.WriteLine($"Duración actual: {plan.DuracionMeses} meses");
-                Console.WriteLine("Ingrese la nueva duración en meses (o presione Enter para mantener la actual):");
-                string inputDuracion = Console.ReadLine();
-                if (int.TryParse(inputDuracion, out int nuevaDuracion))
-                {
-                    plan.DuracionMeses = nuevaDuracion;
-                }
-
-                // 4. Guardar cambios en SQL Server
-                db.SaveChanges();
-                Console.WriteLine("¡Plan actualizado correctamente!");
-            }
-            else
-            {
-                Console.WriteLine("No se encontró ningún plan con ese ID.");
-            }
+            db.SaveChanges();
+            Console.WriteLine("¡Plan actualizado correctamente!");
         }
         else
         {
-            Console.WriteLine("ID no válido.");
+            Console.WriteLine("No se encontró ningún plan con ese ID.");
         }
     }
     Console.ReadLine();
@@ -390,8 +415,7 @@ void eliminarPlan()
 {
     Console.Clear();
     Console.WriteLine("**********Eliminar Plan**********");
-    Console.WriteLine("Ingrese el ID del plan a eliminar: ");
-    int idE = Convert.ToInt32(Console.ReadLine());
+    int idE = LeerEntero("Ingrese el ID del plan a eliminar: ");
 
     using (var db = new GymDbContext())
     {
@@ -409,6 +433,7 @@ void eliminarPlan()
     }
     Console.ReadLine();
 }
+
 void crearInscripcion()
 {
     Console.Clear();
@@ -423,14 +448,9 @@ void crearInscripcion()
             return;
         }
 
-        Console.WriteLine("Ingrese el ID del socio: ");
-        int idS = Convert.ToInt32(Console.ReadLine());
-
-        Console.WriteLine("Ingrese el ID del entrenador: ");
-        int idE = Convert.ToInt32(Console.ReadLine());
-
-        Console.WriteLine("Ingrese el ID del plan: ");
-        int idP = Convert.ToInt32(Console.ReadLine());
+        int idS = LeerEntero("Ingrese el ID del socio: ");
+        int idE = LeerEntero("Ingrese el ID del entrenador: ");
+        int idP = LeerEntero("Ingrese el ID del plan: ");
 
         var s = db.Socios.Find(idS);
         var e = db.Entrenadores.Find(idE);
@@ -438,7 +458,6 @@ void crearInscripcion()
 
         if (s != null && e != null && p != null)
         {
-            
             var nuevaInscripcion = new Inscripcion
             {
                 SocioId = s.Id,
@@ -452,20 +471,12 @@ void crearInscripcion()
             };
 
             db.Inscripciones.Add(nuevaInscripcion);
-            int filasAfectadas = db.SaveChanges(); 
-
-            if (filasAfectadas > 0)
-            {
-                Console.WriteLine("¡Inscripción realizada exitosamente!");
-            }
-            else
-            {
-                Console.WriteLine("Advertencia: No se pudo guardar el registro en la base de datos.");
-            }
+            db.SaveChanges();
+            Console.WriteLine("¡Inscripción realizada exitosamente!");
         }
         else
         {
-            Console.WriteLine("Uno de los IDs no existe.");
+            Console.WriteLine("Uno o más IDs ingresados no existen en la base de datos.");
         }
     }
     Console.ReadLine();
@@ -486,10 +497,9 @@ void listarInscripciones()
                                   .Include(i => i.Plan)
                                   .ToList();
 
-           
-            if (inscripciones == null || inscripciones.Count == 0)
+            if (!inscripciones.Any())
             {
-                Console.WriteLine("No se encontraron inscripciones registradas en la base de datos.");
+                Console.WriteLine("No se encontraron inscripciones registradas.");
             }
             else
             {
@@ -503,34 +513,69 @@ void listarInscripciones()
     }
     catch (Exception ex)
     {
-       
         Console.WriteLine($"Error al consultar inscripciones: {ex.Message}");
     }
 
-    Console.ReadLine(); 
+    Console.ReadLine();
 }
 
-void cambiarEstadoInscripcion()
+void actualizarInscripcion()
 {
     Console.Clear();
-    Console.WriteLine("**********Cambiar Estado de Inscripción**********");
-    Console.WriteLine("Ingrese el ID de la inscripción: ");
-    int idU = Convert.ToInt32(Console.ReadLine());
+    Console.WriteLine("**********Actualizar Inscripción**********");
+    int idU = LeerEntero("Ingrese el ID de la inscripción a modificar: ");
 
     using (var db = new GymDbContext())
     {
-        var insU = db.Inscripciones.Find(idU);
+        var insU = db.Inscripciones
+                     .Include(i => i.Socio)
+                     .Include(i => i.Entrenador)
+                     .Include(i => i.Plan)
+                     .FirstOrDefault(i => i.Id == idU);
+
         if (insU != null)
         {
-            insU.Activa = !insU.Activa;
+            Console.WriteLine($"Socio actual (ID {insU.SocioId}): {insU.Socio?.Nombre}");
+            Console.WriteLine("Ingrese el nuevo ID de Socio [Enter para mantener]:");
+            string inputSocio = Console.ReadLine()?.Trim();
+            if (int.TryParse(inputSocio, out int nuevoSocioId) && db.Socios.Any(s => s.Id == nuevoSocioId))
+            {
+                insU.SocioId = nuevoSocioId;
+            }
+
+            Console.WriteLine($"Entrenador actual (ID {insU.EntrenadorId}): {insU.Entrenador?.Nombre}");
+            Console.WriteLine("Ingrese el nuevo ID de Entrenador [Enter para mantener]:");
+            string inputEnt = Console.ReadLine()?.Trim();
+            if (int.TryParse(inputEnt, out int nuevoEntId) && db.Entrenadores.Any(e => e.Id == nuevoEntId))
+            {
+                insU.EntrenadorId = nuevoEntId;
+            }
+
+            Console.WriteLine($"Plan actual (ID {insU.PlanId}): {insU.Plan?.Nombre}");
+            Console.WriteLine("Ingrese el nuevo ID de Plan [Enter para mantener]:");
+            string inputPlan = Console.ReadLine()?.Trim();
+            if (int.TryParse(inputPlan, out int nuevoPlanId) && db.Planes.Any(p => p.Id == nuevoPlanId))
+            {
+                insU.PlanId = nuevoPlanId;
+            }
+
+            Console.WriteLine($"Estado actual: {(insU.Activa ? "Activa" : "Inactiva")}");
+            Console.WriteLine("¿Desea cambiar el estado? (S/N o Enter para omitir):");
+            string cambiarEstado = Console.ReadLine()?.Trim().ToUpper();
+            if (cambiarEstado == "S")
+            {
+                insU.Activa = !insU.Activa;
+            }
+
             db.SaveChanges();
-            Console.WriteLine($"Estado actualizado a: {(insU.Activa ? "Activa" : "Inactiva")}");
+            Console.WriteLine("¡Inscripción actualizada exitosamente!");
         }
         else
         {
             Console.WriteLine("Inscripción no encontrada.");
         }
     }
+
     Console.ReadLine();
 }
 
@@ -538,8 +583,7 @@ void eliminarInscripcion()
 {
     Console.Clear();
     Console.WriteLine("**********Eliminar Inscripción**********");
-    Console.WriteLine("Ingrese el ID de la inscripción a eliminar: ");
-    int idDel = Convert.ToInt32(Console.ReadLine());
+    int idDel = LeerEntero("Ingrese el ID de la inscripción a eliminar: ");
 
     using (var db = new GymDbContext())
     {
